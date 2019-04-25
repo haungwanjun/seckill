@@ -31,10 +31,11 @@
 <body>
 
 <div class="panel panel-default" style="height:100%;background-color:rgba(222,222,222,0.8)">
-    <div class="panel-heading">秒杀商品详情</div>
+    <div class="panel-heading" align="center">秒杀商品详情</div>
     <div class="panel-body">
         <span id="userTip"> 您还没有登录，请登陆后再操作<br/></span>
-        <span>没有收货地址的提示。。。</span>
+        <span id="userLogin"></span><br>
+        <span id="deliveryAddress"></span>
     </div>
     <table class="table" id="goodslist">
         <tr>
@@ -44,6 +45,10 @@
         <tr>
             <td>商品图片</td>
             <td colspan="3"><img height="200" id="goodsImg" width="200"/></td>
+        </tr>
+        <tr>
+            <td>商品描述</td>
+            <td colspan="3" id="goodsDetail"></td>
         </tr>
         <tr>
             <td>秒杀开始时间</td>
@@ -171,9 +176,14 @@
         var user = detail.user;
         if (user) {
             $("#userTip").hide();
+            $("#userLogin").text("用户名："+user.nickname);
+        }else{
+            $("#userLogin").hide();
         }
+        $("#deliveryAddress").text("收货地址："+user.deliveryAddress);
         $("#goodsName").text(goods.goodsName);
         $("#goodsImg").attr("src", goods.goodsImg);
+        $("#goodsDetail").text(goods.goodsDetail);
         $("#startTime").text(new Date(goods.startDate).format("yyyy-MM-dd hh:mm:ss"));
         $("#remainSeconds").val(remainSeconds);
         $("#goodsId").val(goods.id);

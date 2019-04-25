@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="panel panel-default" style="height:100%;background-color:rgba(222,222,222,0.8)">
-    <div class="panel-heading">秒杀订单详情</div>
+    <div class="panel-heading" align="center">秒杀订单详情</div>
     <table class="table" id="goodslist">
         <tr>
             <td>商品名称</td>
@@ -57,7 +57,7 @@
         </tr>
         <tr>
             <td>收货人</td>
-            <td colspan="2">XXX</td>
+            <td id="userName" colspan="2"></td>
 
         </tr>
         <tr>
@@ -66,7 +66,7 @@
         </tr>
         <tr>
             <td>收货地址</td>
-            <td colspan="2">北京市故宫博物馆旁边的卖包子的小摊</td>
+            <td id="deliveryAddress"  colspan="2"></td>
         </tr>
     </table>
 </div>
@@ -77,7 +77,9 @@
         var goods = detail.goods;
         var order = detail.order;
         $("#userId").text(order.userId);
+        $("#userName").text(order.userName);
         $("#goodsName").text(goods.goodsName);
+        $("#deliveryAddress").text(order.deliveryAddress);
         $("#goodsImg").attr("src", goods.goodsImg);
         $("#orderPrice").text(order.goodsPrice);
         $("#createDate").text(new Date(order.createDate).format("yyyy-MM-dd hh:mm:ss"));

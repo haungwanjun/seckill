@@ -4,6 +4,8 @@ import com.mobilephone.seckill.domain.OrderInfo;
 import com.mobilephone.seckill.domain.SeckillOrder;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 
 @Mapper
 public interface OrderDao {
@@ -11,8 +13,8 @@ public interface OrderDao {
     @Select("select * from seckill_order where user_id=#{userId} and goods_id=#{goodsId}")
     public SeckillOrder getSeckillOrderByUserIdGoodsId(@Param("userId") long userId, @Param("goodsId") long goodsId);
 
-    @Insert("insert into order_info(user_id, goods_id, goods_name, goods_count, goods_price, order_channel, status, create_date)values("
-            + "#{userId}, #{goodsId}, #{goodsName}, #{goodsCount}, #{goodsPrice}, #{orderChannel},#{status},#{createDate} )")
+    @Insert("insert into order_info(user_id, user_name, delivery_address, goods_id, goods_name, goods_count, goods_price, order_channel, status, create_date)values("
+            + "#{userId},#{userName}, #{deliveryAddress},  #{goodsId}, #{goodsName}, #{goodsCount}, #{goodsPrice}, #{orderChannel},#{status},#{createDate} )")
     @SelectKey(keyColumn = "id", keyProperty = "id", resultType = long.class, before = false, statement = "select last_insert_id()")
     public long insert(OrderInfo orderInfo);
 
@@ -27,5 +29,11 @@ public interface OrderDao {
 
     @Delete("delete from seckill_order")
     public void deleteSeckillOrders();
+    @Select("select * from order_info")
+    public List<OrderInfo> getAllOrder();
 
+    @Delete("delete from order_info where id= #{orderId}")
+    void deleteSeckillOrderById(long orderId);
+    @Delete("delete from seckill_order where order_id= #{orderId}")
+    void deleteOrderInfoById(long orderId);
 }

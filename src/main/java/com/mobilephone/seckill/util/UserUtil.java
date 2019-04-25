@@ -27,27 +27,29 @@ public class UserUtil {
             user.setRegisterDate(new Date());
             user.setSalt("1a2b3c");
             user.setPassword(MD5Util.inputPassToDbPass("123456", user.getSalt()));
+            user.setDeliveryAddress("北京故宫博物馆对面天桥上的第"+i+"号地摊");
             users.add(user);
         }
-//        System.out.println("create user");
-//		//插入数据库
-//		Connection conn = DBUtil.getConn();
-//		String sql = "insert into seckill_user(login_count, nickname, register_date, salt, password, id)values(?,?,?,?,?,?)";
-//		PreparedStatement pstmt = conn.prepareStatement(sql);
-//		for(int i=0;i<users.size();i++) {
-//			SeckillUser user = users.get(i);
-//			pstmt.setInt(1, user.getLoginCount());
-//			pstmt.setString(2, user.getNickname());
-//			pstmt.setTimestamp(3, new Timestamp(user.getRegisterDate().getTime()));
-//			pstmt.setString(4, user.getSalt());
-//			pstmt.setString(5, user.getPassword());
-//			pstmt.setLong(6, user.getId());
-//			pstmt.addBatch();
-//		}
-//		pstmt.executeBatch();
-//		pstmt.close();
-//		conn.close();
-//		System.out.println("insert to db");
+        System.out.println("create user");
+		//插入数据库
+		Connection conn = DBUtil.getConn();
+		String sql = "insert into seckill_user(login_count, nickname, register_date, salt, password, id,delivery_address)values(?,?,?,?,?,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		for(int i=0;i<users.size();i++) {
+			SeckillUser user = users.get(i);
+			pstmt.setInt(1, user.getLoginCount());
+			pstmt.setString(2, user.getNickname());
+			pstmt.setTimestamp(3, new Timestamp(user.getRegisterDate().getTime()));
+			pstmt.setString(4, user.getSalt());
+			pstmt.setString(5, user.getPassword());
+			pstmt.setLong(6, user.getId());
+			pstmt.setString(7,user.getDeliveryAddress());
+			pstmt.addBatch();
+		}
+		pstmt.executeBatch();
+		pstmt.close();
+		conn.close();
+		System.out.println("insert to db");
         //登录，生成token
         String urlString = "http://localhost:8080/login/do_login";
         File file = new File("D:/tokens.txt");
@@ -93,6 +95,6 @@ public class UserUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        createUser(50000);
+        createUser(10000);
     }
 }

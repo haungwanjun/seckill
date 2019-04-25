@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -22,6 +23,10 @@ public class OrderService {
 
     @Autowired
     RedisService redisService;
+
+    public List<OrderInfo> listAllOrder() {
+        return orderDao.getAllOrder();
+    }
 
     public SeckillOrder getSeckillOrderByUserIdGoodsId(long userId, long goodsId) {
         //return orderDao.getseckillOrderByUserIdGoodsId(userId, goodsId);
@@ -37,7 +42,8 @@ public class OrderService {
     public OrderInfo createOrder(SeckillUser user, GoodsVo goods) {
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setCreateDate(new Date());
-        orderInfo.setDeliveryAddrId(0L);
+        orderInfo.setDeliveryAddress(user.getDeliveryAddress());
+        orderInfo.setUserName(user.getNickname());
         orderInfo.setGoodsCount(1);
         orderInfo.setGoodsId(goods.getId());
         orderInfo.setGoodsName(goods.getGoodsName());
@@ -51,9 +57,7 @@ public class OrderService {
         seckillOrder.setOrderId(orderInfo.getId());
         seckillOrder.setUserId(user.getId());
         orderDao.insertSeckillOrder(seckillOrder);
-
         redisService.set(OrderKey.getSeckillOrderByUidGid, "" + user.getId() + "_" + goods.getId(), seckillOrder);
-
         return orderInfo;
     }
 
@@ -62,4 +66,8 @@ public class OrderService {
         orderDao.deleteSeckillOrders();
     }
 
+    public void deleteOrderById(Long orderId) {
+        orderDao.deleteOrderInfoById(orderId);
+        orderDao.deleteSeckillOrderById(orderId);
+    }
 }

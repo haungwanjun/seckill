@@ -1,5 +1,8 @@
 package com.mobilephone.seckill.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mobilephone.seckill.util.serializer.Date2LongSerializer;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,7 +14,10 @@ public class SeckillUser {
     private String password;
     private String salt;
     private String head;
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date registerDate;
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date lastLoginDate;
     private Integer loginCount;
+    private String deliveryAddress;
 }
