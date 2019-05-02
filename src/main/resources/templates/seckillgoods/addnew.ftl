@@ -35,11 +35,11 @@
                             <img height="100" width="100" src="${(goods.goodsImg)!''}" alt="">
                         </div>
                         <div class="form-group">
-                            <label>开始时间</label>
+                            <label>开始时间(为了全球统一，请输入GMT(零时区时间))</label>
                             <input name="startDate" type="text" class="form-control"/>
                         </div>
                         <div class="form-group">
-                            <label>结束时间</label>
+                            <label>结束时间(为了全球统一，请输入GMT(零时区时间))</label>
                             <input name="endDate" type="text" class="form-control"/>
                         </div>
                         <input hidden type="text" name="goodsId" value="${(goods.id)!''}">

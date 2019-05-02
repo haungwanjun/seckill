@@ -56,7 +56,7 @@ public class AdminSeckillGoodsController {
         SeckillGoods  seckillGoods = new SeckillGoods();
         seckillGoods.setGoodsId(Long.valueOf(request.getParameter("goodsId")));
         seckillGoods.setStockCount(Integer.valueOf(request.getParameter("stockCount")));
-        seckillGoods.setSeckillPrice(BigDecimal.valueOf(Long.valueOf(request.getParameter("seckillPrice"))));
+        seckillGoods.setSeckillPrice(BigDecimal.valueOf(Double.valueOf(request.getParameter("seckillPrice"))));
         seckillGoods.setStartDate(std.convert(request.getParameter("startDate")));
         seckillGoods.setEndDate(std.convert(request.getParameter("endDate")));
         try {

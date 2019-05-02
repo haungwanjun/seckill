@@ -36,4 +36,6 @@ public interface OrderDao {
     void deleteSeckillOrderById(long orderId);
     @Delete("delete from seckill_order where order_id= #{orderId}")
     void deleteOrderInfoById(long orderId);
+    @Update("update order_info set status = #{status}, pay_date= #{payDate} where id = #{id}")
+    void updateOrderInfoById(OrderInfo orderInfo);
 }

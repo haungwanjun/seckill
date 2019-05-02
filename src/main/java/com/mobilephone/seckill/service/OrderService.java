@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class OrderService {
@@ -69,5 +70,10 @@ public class OrderService {
     public void deleteOrderById(Long orderId) {
         orderDao.deleteOrderInfoById(orderId);
         orderDao.deleteSeckillOrderById(orderId);
+    }
+
+
+    public void updateOrderInfoById(OrderInfo orderInfo) {
+        orderDao.updateOrderInfoById( orderInfo);
     }
 }

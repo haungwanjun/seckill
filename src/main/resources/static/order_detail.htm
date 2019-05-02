@@ -27,14 +27,19 @@
         }
     </style>
 </head>
-<body>
-<div class="panel panel-default" style="height:100%;background-color:rgba(222,222,222,0.8)">
+<body >
+<div class="panel panel-default" align="center" style="height:100%;background-color:rgba(222,222,222,0.8)">
     <div class="panel-heading" align="center">秒杀订单详情</div>
+    <div class="panel-heading" align="center">【注】本网站只做学习之用！！！并非真实商城</div>
     <table class="table" id="goodslist">
         <tr>
             <td>商品名称</td>
             <td colspan="3" id="goodsName"></td>
         </tr>
+        <!--<tr>-->
+            <!--<td>订单ID</td>-->
+            <!--<td colspan="3" id="orderId"></td>-->
+        <!--</tr>-->
         <tr>
             <td>商品图片</td>
             <td colspan="2"><img height="200" id="goodsImg" width="200"/></td>
@@ -52,7 +57,9 @@
             <td id="orderStatus">
             </td>
             <td>
-                <button class="btn btn-primary btn-block" id="payButton" type="submit">立即支付</button>
+                <button class="btn btn-primary btn-block" id="payButton" onclick="startPay()" type="submit" style="width: 30%;display:block;margin:0 auto">立即支付</button>
+                <input id="orderId" name="orderId" type="hidden"/>
+                <div id="showDiv" name="showDiv" type="hidden"/>
             </td>
         </tr>
         <tr>
@@ -69,6 +76,7 @@
             <td id="deliveryAddress"  colspan="2"></td>
         </tr>
     </table>
+                <button class="btn btn-primary btn-block" id="continueSeckillBt" onclick="continueSeckill()" type="submit" style="width: 20%;display:block;margin:0 auto">继续秒杀</button>
 </div>
 </body>
 </html>
@@ -76,18 +84,21 @@
     function render(detail) {
         var goods = detail.goods;
         var order = detail.order;
+        $("#orderId").val(order.id);
         $("#userId").text(order.userId);
         $("#userName").text(order.userName);
         $("#goodsName").text(goods.goodsName);
         $("#deliveryAddress").text(order.deliveryAddress);
         $("#goodsImg").attr("src", goods.goodsImg);
         $("#orderPrice").text(order.goodsPrice);
-        $("#createDate").text(new Date(order.createDate).format("yyyy-MM-dd hh:mm:ss"));
+        $("#createDate").text(new Date(order.createDate*1000).format("yyyy-MM-dd hh:mm:ss"));
         var status = "";
         if (order.status == 0) {
-            status = "未支付"
+            status = "未支付";
+            $("#continueSeckillBt").hide();
         } else if (order.status == 1) {
-            status = "待发货";
+            status = "已支付";
+            $("#payButton").hide();
         }
         $("#orderStatus").text(status);
 
@@ -118,5 +129,32 @@
         });
     }
 
+    function startPay() {
+        var orderId = $("#orderId").val();
+        g_showLoading();
+        $.ajax({
+            url: "/alipay/pcpay/",
+            type: "GET",
+            data: {
+                orderId: orderId
+            },
+            success: function (data) {
+                $("#showDiv").append(data);
 
+            },
+            error: function () {
+                layer.msg("客户端请求有误");
+            }
+        });
+    }
+    function continueSeckill() {
+        $.ajax({
+            success: function () {
+                window.location.href = "/goods/to_list";
+            },
+            error: function () {
+                layer.msg("客户端请求有误");
+            }
+        });
+    }
 </script>

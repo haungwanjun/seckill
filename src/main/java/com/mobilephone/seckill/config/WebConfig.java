@@ -2,6 +2,7 @@ package com.mobilephone.seckill.config;
 
 
 import com.mobilephone.seckill.access.AccessInterceptor;
+import com.mobilephone.seckill.access.AliPayInterceptor;
 import com.mobilephone.seckill.converter.StringToDateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(accessInterceptor);
+        registry.addInterceptor(new AliPayInterceptor()).addPathPatterns("/alipay/**");
     }
 
     @Autowired

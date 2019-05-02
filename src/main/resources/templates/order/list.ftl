@@ -40,7 +40,7 @@
                             <td>${orderInfo.goodsPrice}</td>
                             <td>${orderInfo.status}</td>
                             <#--不能将Date类型直接转化为String类型-->
-                            <td>${(orderInfo.createDate)?string("yyyy-MM-dd hh:mm:ss")}</td>
+                            <td>${(orderInfo.createDate)?string("yyyy-MM-dd HH:mm:ss")}</td>
                             <td><a href="/admin/order/detail?orderId=${orderInfo.id}">详情</a></td>
                             <td>
                                 <#if orderInfo.status == 0>

@@ -35,12 +35,12 @@
                             <img height="100" width="100" src="${(goodsVo.goodsImg)!''}" alt="">
                         </div>
                         <div class="form-group">
-                            <label>开始时间</label>
-                            <input name="startDate" type="text" class="form-control" value="${(goodsVo.startDate)?string("yyyy-MM-dd hh:mm:ss")!''}"/>
+                            <label>开始时间(为了全球统一，请输入GMT(零时区时间))</label>
+                            <input name="startDate" type="text" class="form-control" value="${(goodsVo.startDate)?string("yyyy-MM-dd HH:mm:ss")!''}"/>
                         </div>
                         <div class="form-group">
-                            <label>结束时间</label>
-                            <input name="endDate" type="text" class="form-control" value="${(goodsVo.endDate)?string("yyyy-MM-dd hh:mm:ss")!''}"/>
+                            <label>结束时间(为了全球统一，请输入GMT(零时区时间))</label>
+                            <input name="endDate" type="text" class="form-control" value="${(goodsVo.endDate)?string("yyyy-MM-dd HH:mm:ss")!''}"/>
                         </div>
                         <input hidden type="text" name="id" value="${(goodsVo.id)!''}">
                         <#if (goodsVo.id)??>

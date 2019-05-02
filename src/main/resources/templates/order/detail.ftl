@@ -69,7 +69,7 @@
                             <td>${orderInfo.goodsPrice}</td>
                             <td>${orderInfo.goodsCount}</td>
                             <td>${orderInfo.goodsCount * orderInfo.goodsPrice}</td>
-                            <td>${(orderInfo.createDate)?string("yyyy-MM-dd hh:mm:ss")}</td>
+                            <td>${(orderInfo.createDate)?string("yyyy-MM-dd HH:mm:ss")}</td>
                         </tr>
                         </tbody>
                     </table>

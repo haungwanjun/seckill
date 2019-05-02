@@ -82,6 +82,39 @@ VALUES
 (5,'OPPO Reno','OPPO Reno 10倍变焦版 全面屏拍照手机 6G+256G 雾海绿 全网通','/img/oppoReno10.jpg','OPPO Reno 10倍变焦版 全面屏拍照手机 6G+256G 雾海绿 全网通 移动联通电信 双卡双待手机',5000,999,1);
 SELECT * FROM seckill.goods;
 
+-- 秒杀订单
+CREATE TABLE `seckill`.`order_pay` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
+  `order_id` bigint(20) DEFAULT NULL,
+  `goods_id` bigint(20) DEFAULT NULL,
+  `seller_id`  varchar(32) DEFAULT NULL,
+  `app_id`  varchar(32) DEFAULT NULL,
+  `total_amount` decimal(10,2) DEFAULT '0.00',
+  `trade_status` varchar(32) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `body` varchar(400) DEFAULT NULL,
+  `out_trade_no` varchar(64) NOT NULL,
+  `gmt_create` datetime DEFAULT NULL,
+  `gmt_payment` datetime DEFAULT NULL,
+  `gmt_refund` datetime DEFAULT NULL,
+  `gmt_close` datetime DEFAULT NULL,
+  `passback_params` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+
+-- 秒杀订单
+CREATE TABLE `seckill`.`pay_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
+  `order_id` bigint(20) DEFAULT NULL,
+   `pay_platform` varchar(64) DEFAULT NULL,
+  `platform_number` int DEFAULT NULL,
+  `platform_status` varchar(64) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 ```
 

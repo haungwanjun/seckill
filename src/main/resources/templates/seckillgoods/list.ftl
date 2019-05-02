@@ -36,8 +36,8 @@
                             <td>${goodsVo.goodsPrice}</td>
                             <td>${goodsVo.seckillPrice}</td>
                             <td>${goodsVo.stockCount}</td>
-                            <td>${(goodsVo.startDate)?string("yyyy-MM-dd hh:mm:ss")}</td>
-                            <td>${(goodsVo.endDate)?string("yyyy-MM-dd hh:mm:ss")}</td>
+                            <td>${(goodsVo.startDate)?string("yyyy-MM-dd HH:mm:ss")}</td>
+                            <td>${(goodsVo.endDate)?string("yyyy-MM-dd HH:mm:ss")}</td>
                             <td><a href="/admin/seckillgoods/update?goodsId=${goodsVo.id}">修改</a></td>
                             <td><a href="/admin/seckillgoods/delete?goodsId=${goodsVo.id}">删除</a></td>
                         </tr>
